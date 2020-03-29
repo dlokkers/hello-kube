@@ -4,7 +4,7 @@ import "errors"
 
 // Article contains the ID, title and text of an article
 type Article struct {
-	ID      int    `json:"id"`
+	ID      uint32 `json:"id"`
 	Title   string `json:"title"`
 	Content string `json:"content"`
 }
@@ -20,7 +20,7 @@ func GetAllArticles() []Article {
 }
 
 // GetArticle takes an article id and returns the article or throws an error if article isn't found
-func GetArticle(id int) (*Article, error) {
+func GetArticle(id uint32) (*Article, error) {
 	for _, a := range articleList {
 		if a.ID == id {
 			return &a, nil
