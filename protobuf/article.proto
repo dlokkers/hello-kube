@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package protobuf;
+
+message GetArticle {
+    uint32 id = 1;
+}
+
+message ArticleResponse {
+    uint32 id = 1;
+    string title = 2;
+    string content = 3;
+}
+
+service RetrieveArticle {
+    rpc Retrieve (GetArticle) returns (ArticleResponse) {}
+}
