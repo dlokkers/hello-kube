@@ -24,46 +24,116 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
-type GetArticle struct {
+type Empty struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Empty) Reset()         { *m = Empty{} }
+func (m *Empty) String() string { return proto.CompactTextString(m) }
+func (*Empty) ProtoMessage()    {}
+func (*Empty) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5c593d380f9840a2, []int{0}
+}
+
+func (m *Empty) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Empty.Unmarshal(m, b)
+}
+func (m *Empty) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Empty.Marshal(b, m, deterministic)
+}
+func (m *Empty) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Empty.Merge(m, src)
+}
+func (m *Empty) XXX_Size() int {
+	return xxx_messageInfo_Empty.Size(m)
+}
+func (m *Empty) XXX_DiscardUnknown() {
+	xxx_messageInfo_Empty.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Empty proto.InternalMessageInfo
+
+type ArticleID struct {
 	Id                   uint32   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *GetArticle) Reset()         { *m = GetArticle{} }
-func (m *GetArticle) String() string { return proto.CompactTextString(m) }
-func (*GetArticle) ProtoMessage()    {}
-func (*GetArticle) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5c593d380f9840a2, []int{0}
+func (m *ArticleID) Reset()         { *m = ArticleID{} }
+func (m *ArticleID) String() string { return proto.CompactTextString(m) }
+func (*ArticleID) ProtoMessage()    {}
+func (*ArticleID) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5c593d380f9840a2, []int{1}
 }
 
-func (m *GetArticle) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_GetArticle.Unmarshal(m, b)
+func (m *ArticleID) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ArticleID.Unmarshal(m, b)
 }
-func (m *GetArticle) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_GetArticle.Marshal(b, m, deterministic)
+func (m *ArticleID) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ArticleID.Marshal(b, m, deterministic)
 }
-func (m *GetArticle) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetArticle.Merge(m, src)
+func (m *ArticleID) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ArticleID.Merge(m, src)
 }
-func (m *GetArticle) XXX_Size() int {
-	return xxx_messageInfo_GetArticle.Size(m)
+func (m *ArticleID) XXX_Size() int {
+	return xxx_messageInfo_ArticleID.Size(m)
 }
-func (m *GetArticle) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetArticle.DiscardUnknown(m)
+func (m *ArticleID) XXX_DiscardUnknown() {
+	xxx_messageInfo_ArticleID.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_GetArticle proto.InternalMessageInfo
+var xxx_messageInfo_ArticleID proto.InternalMessageInfo
 
-func (m *GetArticle) GetId() uint32 {
+func (m *ArticleID) GetId() uint32 {
 	if m != nil {
 		return m.Id
 	}
 	return 0
 }
 
-type ArticleResponse struct {
+type ArticleList struct {
+	Articles             []*Article `protobuf:"bytes,1,rep,name=articles,proto3" json:"articles,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *ArticleList) Reset()         { *m = ArticleList{} }
+func (m *ArticleList) String() string { return proto.CompactTextString(m) }
+func (*ArticleList) ProtoMessage()    {}
+func (*ArticleList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5c593d380f9840a2, []int{2}
+}
+
+func (m *ArticleList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ArticleList.Unmarshal(m, b)
+}
+func (m *ArticleList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ArticleList.Marshal(b, m, deterministic)
+}
+func (m *ArticleList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ArticleList.Merge(m, src)
+}
+func (m *ArticleList) XXX_Size() int {
+	return xxx_messageInfo_ArticleList.Size(m)
+}
+func (m *ArticleList) XXX_DiscardUnknown() {
+	xxx_messageInfo_ArticleList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ArticleList proto.InternalMessageInfo
+
+func (m *ArticleList) GetArticles() []*Article {
+	if m != nil {
+		return m.Articles
+	}
+	return nil
+}
+
+type Article struct {
 	Id                   uint32   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Title                string   `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
 	Content              string   `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
@@ -72,46 +142,46 @@ type ArticleResponse struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *ArticleResponse) Reset()         { *m = ArticleResponse{} }
-func (m *ArticleResponse) String() string { return proto.CompactTextString(m) }
-func (*ArticleResponse) ProtoMessage()    {}
-func (*ArticleResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5c593d380f9840a2, []int{1}
+func (m *Article) Reset()         { *m = Article{} }
+func (m *Article) String() string { return proto.CompactTextString(m) }
+func (*Article) ProtoMessage()    {}
+func (*Article) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5c593d380f9840a2, []int{3}
 }
 
-func (m *ArticleResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ArticleResponse.Unmarshal(m, b)
+func (m *Article) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Article.Unmarshal(m, b)
 }
-func (m *ArticleResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ArticleResponse.Marshal(b, m, deterministic)
+func (m *Article) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Article.Marshal(b, m, deterministic)
 }
-func (m *ArticleResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ArticleResponse.Merge(m, src)
+func (m *Article) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Article.Merge(m, src)
 }
-func (m *ArticleResponse) XXX_Size() int {
-	return xxx_messageInfo_ArticleResponse.Size(m)
+func (m *Article) XXX_Size() int {
+	return xxx_messageInfo_Article.Size(m)
 }
-func (m *ArticleResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_ArticleResponse.DiscardUnknown(m)
+func (m *Article) XXX_DiscardUnknown() {
+	xxx_messageInfo_Article.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ArticleResponse proto.InternalMessageInfo
+var xxx_messageInfo_Article proto.InternalMessageInfo
 
-func (m *ArticleResponse) GetId() uint32 {
+func (m *Article) GetId() uint32 {
 	if m != nil {
 		return m.Id
 	}
 	return 0
 }
 
-func (m *ArticleResponse) GetTitle() string {
+func (m *Article) GetTitle() string {
 	if m != nil {
 		return m.Title
 	}
 	return ""
 }
 
-func (m *ArticleResponse) GetContent() string {
+func (m *Article) GetContent() string {
 	if m != nil {
 		return m.Content
 	}
@@ -119,8 +189,10 @@ func (m *ArticleResponse) GetContent() string {
 }
 
 func init() {
-	proto.RegisterType((*GetArticle)(nil), "protobuf.GetArticle")
-	proto.RegisterType((*ArticleResponse)(nil), "protobuf.ArticleResponse")
+	proto.RegisterType((*Empty)(nil), "protobuf.Empty")
+	proto.RegisterType((*ArticleID)(nil), "protobuf.ArticleID")
+	proto.RegisterType((*ArticleList)(nil), "protobuf.ArticleList")
+	proto.RegisterType((*Article)(nil), "protobuf.Article")
 }
 
 func init() {
@@ -128,18 +200,21 @@ func init() {
 }
 
 var fileDescriptor_5c593d380f9840a2 = []byte{
-	// 162 bytes of a gzipped FileDescriptorProto
+	// 216 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4d, 0x2c, 0x2a, 0xc9,
 	0x4c, 0xce, 0x49, 0xd5, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x00, 0x53, 0x49, 0xa5, 0x69,
-	0x4a, 0x32, 0x5c, 0x5c, 0xee, 0xa9, 0x25, 0x8e, 0x10, 0x59, 0x21, 0x3e, 0x2e, 0xa6, 0xcc, 0x14,
-	0x09, 0x46, 0x05, 0x46, 0x0d, 0xde, 0x20, 0xa6, 0xcc, 0x14, 0xa5, 0x40, 0x2e, 0x7e, 0xa8, 0x54,
-	0x50, 0x6a, 0x71, 0x41, 0x7e, 0x5e, 0x31, 0x86, 0x12, 0x21, 0x11, 0x2e, 0xd6, 0x92, 0xcc, 0x92,
-	0x9c, 0x54, 0x09, 0x26, 0x05, 0x46, 0x0d, 0xce, 0x20, 0x08, 0x47, 0x48, 0x82, 0x8b, 0x3d, 0x39,
-	0x3f, 0xaf, 0x24, 0x35, 0xaf, 0x44, 0x82, 0x19, 0x2c, 0x0e, 0xe3, 0x1a, 0x05, 0x70, 0xf1, 0x07,
-	0xa5, 0x96, 0x14, 0x65, 0xa6, 0x96, 0xa5, 0xc2, 0x6c, 0xb5, 0xe5, 0xe2, 0x80, 0x09, 0x09, 0x89,
-	0xe8, 0xc1, 0x9c, 0xa6, 0x87, 0x70, 0x97, 0x94, 0x24, 0x42, 0x14, 0xcd, 0x3d, 0x4a, 0x0c, 0x49,
-	0x6c, 0x60, 0x39, 0x63, 0x40, 0x00, 0x00, 0x00, 0xff, 0xff, 0xd2, 0x0b, 0x15, 0x4d, 0xe4, 0x00,
-	0x00, 0x00,
+	0x4a, 0xec, 0x5c, 0xac, 0xae, 0xb9, 0x05, 0x25, 0x95, 0x4a, 0xd2, 0x5c, 0x9c, 0x8e, 0x10, 0x35,
+	0x9e, 0x2e, 0x42, 0x7c, 0x5c, 0x4c, 0x99, 0x29, 0x12, 0x8c, 0x0a, 0x8c, 0x1a, 0xbc, 0x41, 0x4c,
+	0x99, 0x29, 0x4a, 0x36, 0x5c, 0xdc, 0x50, 0x49, 0x9f, 0xcc, 0xe2, 0x12, 0x21, 0x5d, 0x2e, 0x0e,
+	0xa8, 0x79, 0xc5, 0x12, 0x8c, 0x0a, 0xcc, 0x1a, 0xdc, 0x46, 0x82, 0x7a, 0x30, 0x13, 0xf5, 0xa0,
+	0x0a, 0x83, 0xe0, 0x4a, 0x94, 0x3c, 0xb9, 0xd8, 0xa1, 0x82, 0xe8, 0x06, 0x0b, 0x89, 0x70, 0xb1,
+	0x96, 0x64, 0x96, 0xe4, 0xa4, 0x4a, 0x30, 0x29, 0x30, 0x6a, 0x70, 0x06, 0x41, 0x38, 0x42, 0x12,
+	0x5c, 0xec, 0xc9, 0xf9, 0x79, 0x25, 0xa9, 0x79, 0x25, 0x12, 0xcc, 0x60, 0x71, 0x18, 0xd7, 0xa8,
+	0x91, 0x91, 0x8b, 0x03, 0x6a, 0x56, 0xb1, 0x90, 0x05, 0x17, 0x0f, 0xc8, 0x39, 0x70, 0x3e, 0x3f,
+	0xc2, 0x11, 0x60, 0x3f, 0x49, 0x89, 0x62, 0xb8, 0x0a, 0xa4, 0x5e, 0x89, 0x41, 0xc8, 0x9a, 0x8b,
+	0x3f, 0x28, 0xb5, 0xa4, 0x28, 0x33, 0xb5, 0x2c, 0x15, 0xe6, 0x32, 0x61, 0x0c, 0xb5, 0x9e, 0x2e,
+	0x52, 0x98, 0xde, 0x52, 0x62, 0x48, 0x62, 0x03, 0x8b, 0x19, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff,
+	0x6e, 0x80, 0x3c, 0xfc, 0x54, 0x01, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -150,72 +225,108 @@ var _ grpc.ClientConnInterface
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion6
 
-// RetrieveArticleClient is the client API for RetrieveArticle service.
+// ArticlesClient is the client API for Articles service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type RetrieveArticleClient interface {
-	Retrieve(ctx context.Context, in *GetArticle, opts ...grpc.CallOption) (*ArticleResponse, error)
+type ArticlesClient interface {
+	ListArticles(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ArticleList, error)
+	RetrieveArticle(ctx context.Context, in *ArticleID, opts ...grpc.CallOption) (*Article, error)
 }
 
-type retrieveArticleClient struct {
+type articlesClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewRetrieveArticleClient(cc grpc.ClientConnInterface) RetrieveArticleClient {
-	return &retrieveArticleClient{cc}
+func NewArticlesClient(cc grpc.ClientConnInterface) ArticlesClient {
+	return &articlesClient{cc}
 }
 
-func (c *retrieveArticleClient) Retrieve(ctx context.Context, in *GetArticle, opts ...grpc.CallOption) (*ArticleResponse, error) {
-	out := new(ArticleResponse)
-	err := c.cc.Invoke(ctx, "/protobuf.RetrieveArticle/Retrieve", in, out, opts...)
+func (c *articlesClient) ListArticles(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ArticleList, error) {
+	out := new(ArticleList)
+	err := c.cc.Invoke(ctx, "/protobuf.Articles/ListArticles", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// RetrieveArticleServer is the server API for RetrieveArticle service.
-type RetrieveArticleServer interface {
-	Retrieve(context.Context, *GetArticle) (*ArticleResponse, error)
+func (c *articlesClient) RetrieveArticle(ctx context.Context, in *ArticleID, opts ...grpc.CallOption) (*Article, error) {
+	out := new(Article)
+	err := c.cc.Invoke(ctx, "/protobuf.Articles/RetrieveArticle", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
-// UnimplementedRetrieveArticleServer can be embedded to have forward compatible implementations.
-type UnimplementedRetrieveArticleServer struct {
+// ArticlesServer is the server API for Articles service.
+type ArticlesServer interface {
+	ListArticles(context.Context, *Empty) (*ArticleList, error)
+	RetrieveArticle(context.Context, *ArticleID) (*Article, error)
 }
 
-func (*UnimplementedRetrieveArticleServer) Retrieve(ctx context.Context, req *GetArticle) (*ArticleResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Retrieve not implemented")
+// UnimplementedArticlesServer can be embedded to have forward compatible implementations.
+type UnimplementedArticlesServer struct {
 }
 
-func RegisterRetrieveArticleServer(s *grpc.Server, srv RetrieveArticleServer) {
-	s.RegisterService(&_RetrieveArticle_serviceDesc, srv)
+func (*UnimplementedArticlesServer) ListArticles(ctx context.Context, req *Empty) (*ArticleList, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListArticles not implemented")
+}
+func (*UnimplementedArticlesServer) RetrieveArticle(ctx context.Context, req *ArticleID) (*Article, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RetrieveArticle not implemented")
 }
 
-func _RetrieveArticle_Retrieve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetArticle)
+func RegisterArticlesServer(s *grpc.Server, srv ArticlesServer) {
+	s.RegisterService(&_Articles_serviceDesc, srv)
+}
+
+func _Articles_ListArticles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RetrieveArticleServer).Retrieve(ctx, in)
+		return srv.(ArticlesServer).ListArticles(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/protobuf.RetrieveArticle/Retrieve",
+		FullMethod: "/protobuf.Articles/ListArticles",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RetrieveArticleServer).Retrieve(ctx, req.(*GetArticle))
+		return srv.(ArticlesServer).ListArticles(ctx, req.(*Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _RetrieveArticle_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "protobuf.RetrieveArticle",
-	HandlerType: (*RetrieveArticleServer)(nil),
+func _Articles_RetrieveArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ArticleID)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArticlesServer).RetrieveArticle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/protobuf.Articles/RetrieveArticle",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArticlesServer).RetrieveArticle(ctx, req.(*ArticleID))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Articles_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "protobuf.Articles",
+	HandlerType: (*ArticlesServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Retrieve",
-			Handler:    _RetrieveArticle_Retrieve_Handler,
+			MethodName: "ListArticles",
+			Handler:    _Articles_ListArticles_Handler,
+		},
+		{
+			MethodName: "RetrieveArticle",
+			Handler:    _Articles_RetrieveArticle_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
