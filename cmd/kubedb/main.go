@@ -12,49 +12,90 @@ import (
 	pb "github.com/dlokkers/hello-kube/protobuf"
 )
 
-type server struct{}
-
-func (s *server) ListArticles(cxt context.Context, r *pb.Empty) (*pb.ArticleList, error) {
-	result := &pb.ArticleList{}
-	articles := model.GetAllArticles()
-
-	for _, v := range articles {
-		article := &pb.Article{}
-		article.Id = v.ID
-		article.Title = v.Title
-		article.Content = v.Content
-
-		result.Articles = append(result.Articles, article)
-	}
-
-	return result, nil
+type server struct {
+	db model.RecipeStore
 }
 
-func (s *server) RetrieveArticle(cxt context.Context, r *pb.ArticleID) (*pb.Article, error) {
-	result := &pb.Article{}
-	article, err := model.GetArticle(r.Id)
+func (s *server) ListRecipes(cxt context.Context, r *pb.Empty) (*pb.RecipeList, error) {
+	result := &pb.RecipeList{}
+	recipes, err := s.db.GetAllRecipes()
 
 	if err != nil {
 		return nil, err
 	}
 
-	result.Id = r.Id
-	result.Title = article.Title
-	result.Content = article.Content
+	for _, r := range recipes {
+		result.Title = append(result.Title, r)
+	}
 
 	return result, nil
 }
 
+func (s *server) RetrieveRecipe(cxt context.Context, r *pb.RecipeTitle) (*pb.Recipe, error) {
+	recipe, err := s.db.GetRecipe(r.Title)
+	if err != nil {
+		return nil, err
+	}
+
+	result := &pb.Recipe{
+		Title:   recipe.Title,
+		Process: recipe.Process,
+	}
+
+	for _, i := range recipe.Ingredients {
+		ingredient := &pb.Ingredient{
+			Amount: i.Amount,
+			Type:   i.Type,
+		}
+		result.Ingredients = append(result.Ingredients, ingredient)
+	}
+
+	return result, nil
+}
+
+func (s *server) AddRecipe(cxt context.Context, r *pb.Recipe) (*pb.Empty, error) {
+
+	add := &model.Recipe{
+		Title:   r.Title,
+		Process: r.Process,
+	}
+
+	for _, i := range r.Ingredients {
+		ingredient := model.Ingredient{
+			Amount: i.Amount,
+			Type:   i.Type,
+		}
+		add.Ingredients = append(add.Ingredients, ingredient)
+	}
+
+	err := s.db.AddRecipe(add.Title, add.Ingredients, add.Process)
+	res := &pb.Empty{}
+
+	return res, err
+}
+
 func main() {
-	lis, err := net.Listen("tcp", ":3000")
+	// Setup Aerospike cluster
+	// TODO: Create these values as configurables
+	db, err := model.NewDB("172.28.128.3", 3000)
+	if err != nil {
+		log.Fatalf("Failed to connect to Aerospike: %v", err)
+	}
+	defer db.Close()
+	server := &server{db}
+
+	// Listen to incoming gRPC calls
+	lis, err := net.Listen("tcp", ":5678")
 	if err != nil {
 		log.Fatalf("Failed to listen: %v", err)
 	}
 
 	s := grpc.NewServer()
-	pb.RegisterArticlesServer(s, &server{})
+	pb.RegisterRecipesServer(s, server)
 	reflection.Register(s)
+
 	log.Println("Attempt to listen")
+
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("Failed to serve: %v", err)
 	}

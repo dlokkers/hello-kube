@@ -11,18 +11,17 @@ import (
 
 func main() {
 	// Set up a connection to the server
-	conn, err := grpc.Dial("localhost:3000", grpc.WithInsecure())
+	// TODO: Create these values as configurables
+	conn, err := grpc.Dial("localhost:5678", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("Did not connect: %v", err)
 	}
 	defer conn.Close()
-	client := pb.NewArticlesClient(conn)
+	client := pb.NewRecipesClient(conn)
 
 	// Setup HTTP Server
 	r := gin.Default()
 	r.LoadHTMLGlob("templates/*")
-
-	// open gRPC client
 
 	routes.Init(r, client)
 

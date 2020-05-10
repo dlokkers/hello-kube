@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package protobuf;
+
+message Empty {}
+
+message RecipeTitle {
+    string title = 1;
+}
+
+message RecipeList {
+    repeated string title = 1;
+}
+
+message Ingredient {
+    string amount = 1;
+    string type = 2;
+}
+
+message Recipe {
+    string title = 1;
+    repeated Ingredient ingredients = 2;
+    string process = 3;
+}
+
+service Recipes {
+    rpc ListRecipes (Empty) returns (RecipeList) {}
+    rpc RetrieveRecipe (RecipeTitle) returns (Recipe) {}
+    rpc AddRecipe (Recipe) returns (Empty) {}
+}

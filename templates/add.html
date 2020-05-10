@@ -1,0 +1,17 @@
+<!--add.html-->
+
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+
+  
+<!--Create form to submit new recipes-->
+<form  method="post">
+    <label for="title">Recipe name:</label></br>
+    <input type="text" id="title" name="title"></br>
+    <label for="process">Process:</label></br>
+    <input type="text" id="process" name="process"></br>
+    <input type="submit" value="Submit">
+</form>
+
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}
